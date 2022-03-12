@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+</head>
+<body>
+    <main>
+        <h1>Star Wars Trivia</h1>
+        <h2>Compare characters from the Star Wars Universe</h2>
+        <form id="characterSelection">
+        <select name="character1" id="character1">
+            <option value="" selected disabled>Choose first character...</option>
+            <option value="R2D2">R2-D2</option>
+            <option value="leiaOrgana">Leia Organa</option>
+            <option value="darthVader">Darth Vader</option>
+            <option value="yoda">Yoda</option>
+        </select>
+
+        <select name="character2" id="character2">
+            <option value="" selected disabled>Choose second character...</option>
+            <option value="C3PO">C-3PO</option>
+            <option value="obiWanKenobi">Obi-Wan Kenobi</option>
+            <option value="bobaFett">Boba Fett</option>
+            <option value="jabba">Jabba Desilijic Tiure</option>
+        </select>
+        <button id="getInfo">Get info</button>
+    </form>
+
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
