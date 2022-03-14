@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@300&family=Orbitron&display=swap");
+body {
+  background-image: url("https://images.unsplash.com/photo-1559657693-e816ff3bd9af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80");
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: auto;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+body main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+body main .fade-effect1 {
+  display: block;
+  border: none;
+  color: black;
+  height: 1px;
+  background: white;
+  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#fff), to(#000));
+}
+
+body main form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+body main form select {
+  margin: 1rem;
+}
+
+body main form .btn {
+  margin: 0 2rem;
+}
+
+h1, h2, h3, p {
+  color: white;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+h2, h3 {
+  font-family: 'Jura', sans-serif;
+}
+
+.displayDiv {
+  width: 80%;
+  border: solid 1px white;
+  margin: 1rem;
+  padding-left: 1rem;
+}
+
+.displayDiv img {
+  width: 50%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.btn {
+  padding: 8px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #f3ab4d;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(252, 251, 251, 0.5);
+          box-shadow: 0 2px 4px 0 rgba(252, 251, 251, 0.5);
+  font-size: large;
+  font-weight: 800;
+  color: black;
+  -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+  font-family: 'Jura', sans-serif;
+}
+
+.btn:hover {
+  background-color: #db541f;
+  -webkit-box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (min-width: 768px) {
+  main form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+/*# sourceMappingURL=style.css.map */

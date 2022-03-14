@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300&family=Orbitron&display=swap');
+
+@mixin h1-font {
+    font-family: 'Orbitron', sans-serif;
+}
+
+@mixin h2-font {
+    font-family: 'Jura', sans-serif;
+}
+
+@mixin p-font {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+
+body {
+    background-image: url('https://images.unsplash.com/photo-1559657693-e816ff3bd9af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80');
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: auto;
+    margin: 0;
+    padding: 0;
+    @include flex-column;
+    
+    main {
+        @include flex-column;
+        text-align: center;
+
+        .fade-effect1{
+            display:block;
+            border:none;
+            color:black;
+            height:1px;
+            background:white;
+            background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#fff), to(#000));
+        }
+
+        form {
+            @include flex-column;
+
+            select {
+                margin: 1rem;
+            }
+
+            .btn {
+                margin: 0 2rem;
+            }
+           
+
+        }
+    }
+}
+
+h1, h2, h3, p {
+    color: white
+}
+
+h1 {
+    @include h1-font;
+}
+
+h2, h3 {
+    @include h2-font;
+}
+
+.displayDiv {
+    width: 80%;    
+    border: solid 1px white;
+    margin: 1rem;
+    padding-left: 1rem;
+
+    img {
+        width: 50%;
+        object-fit: contain;
+       
+    }
+}
+
+.btn {
+    padding: 8px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgb(243, 171, 77);
+    box-shadow: 0 2px 4px 0 rgba(252, 251, 251, 0.5);
+    font-size: large;
+    font-weight: 800;
+    color: black;
+    transition-duration: 0.4s;
+    @include h2-font;
+}
+
+.btn:hover {
+    background-color:rgb(219, 84, 31);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+//För skärmar i tablet-format och uppåt
+@media only screen and (min-width: 768px) {
+
+    main
+    {
+        form {
+            display: flex;
+            flex-direction: row;//Funkar ej, kolla sen!
+        }
+    } 
+}
