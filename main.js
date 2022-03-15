@@ -14,7 +14,7 @@
 
 
 //Fetcha specifik info från API:et
-let getCharacters = async (character1, character2) => {
+let fetchCharacters = async (character1, character2) => {
   let response1 = await fetch(`https://swapi.dev/api/people/?search=${character1}`);
   let response2 = await fetch(`https://swapi.dev/api/people/?search=${character2}`);
 
@@ -27,21 +27,6 @@ let getCharacters = async (character1, character2) => {
     return characters;
   }
 }
-
-
-let onRender = async ()=>{
-
-
-  let data = await getCharacters('leia', 'yoda');
-  console.log(data);//två arrayer med info om karaktärerna
-
-  //de-structure the object
-  //let { name, gender, height, mass, hair_color } = data;
-
-}
-onRender();
-
-
 
 
 //En klass kallad Character med name, gender, height, mass,hairColor samt pictureUrl
@@ -62,37 +47,54 @@ class Character {
     compareGender(){}
 }
 
+const pictureUrl = {
+  R2D2 : 'images/r2d2.jpg',
+  leia : 'images/leiaorgana.jpg',
+  darth : 'images/dartvader.jpg',
+  yoda : 'images/yoda.jpg',
+  c3po: 'images/c3po.jpg',
+  obiwan: 'images/obiwan.jpg',
+  boba: 'images/bobafett.jpg',
+  jabba: 'images/jabba.jpg'
+}
 
-const character1 = document.querySelector('#character1').value;
-const character2 = document.querySelector('#character2').value;
+const form = document.querySelector('#characterSelection');
 const btn = document.querySelector('#getInfo');
 
-
- //När användaren klickar på knappen vill jag, för varje vald karaktär: 
+  //När användaren klickar på knappen vill jag, för varje vald karaktär: 
   //hämta info från API om de specifika karaktärerna
   //Använda den infon för att skapa en instans av klassen character för valda karaktärer
-  //Rendera ut divar med Namn, bild och en knapp för valda karaktärer
+  //Rendera ut divar med namn, bild och knapp för valda karaktärer
   btn.addEventListener('click', (e)=>{
-  e.preventDefault();
-  console.log('user clicks Get Info')
+    e.preventDefault();
+    console.log('user clicks Get Info')
 
-  let testCharacter = new Character(data.name, data.gender, data.height, data.mass, data.hair_color); 
-  console.log(testCharacter.name)
+    const character1 = document.querySelector('#character1');
+    const character2 = document.querySelector('#character2');
 
-  //Det här skriver ut namn och bild 
-  let div1 = document.createElement('div');
-  div1.classList.add('displayDiv');
-  div1.innerHTML = `<h3>Name: ${testCharacter.name} <br> <img src='${pictureUrl.R2D2}'</img>`
+    if(character1.value !== '' && character2.value !== ''){
+      fetchCharacters(character1.value, character2.value)
+      .then(characters => {
+        characters.forEach(character =>{
+          character.forEach(obj =>{
+            //blir detta bra verkligen? hur gör jag sen när jag ska jämföra de båda?
+            //här vill jag också få in pictureUrl. Hur gör jag det bäst?
+            let { name, gender, height, mass, hair_color } = obj;
+            let newChar = new Character(obj.name, obj.gender, obj.height, obj.mass, obj.hair_color)
+            console.log(newChar)
 
-  document.body.append(div1)
+              //skapar en div med namn (och snart bild)
+              let div = document.createElement('div');
+              div.classList.add('displayDiv');
+              div.innerHTML = `<h3>Name: ${newChar.name} <br> ` /*<img src='${newChar.pictureUrl}'</img>*/
+              form.append(div);
 
-  // if(character1 !== '' && character2 !== ''){
-  //   //Gör nånting
-   
-  // }else{
-  //   alert('You must choose two characters!')
-  // }
- 
+          })
+        })      
+      })
+    }else{
+      alert('You must choose two characters!')
+    }
 })
 
 
