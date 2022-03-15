@@ -41,56 +41,61 @@ class Character {
     }
 
     //Metoder för jämförelser -vikt, längt, hårfärg, kön
-    compareWeight(){}
+    compareMass(secondPerson){
+
+      if(this.mass < secondPerson.mass){
+        return `${this.name} weighs ${this.mass}, which is less than ${secondPerson.name}, ${secondPerson.mass}`;
+      }else if(this.mass === secondPerson.mass){
+
+      }
+
+    }
     compareHeight(){}
     compareHair(){}
     compareGender(){}
 }
 
 const pictureUrl = {
-  R2D2 : 'images/r2d2.jpg',
-  leia : 'images/leiaorgana.jpg',
-  darth : 'images/dartvader.jpg',
-  yoda : 'images/yoda.jpg',
-  c3po: 'images/c3po.jpg',
-  obiwan: 'images/obiwan.jpg',
-  boba: 'images/bobafett.jpg',
-  jabba: 'images/jabba.jpg'
+  r2d2 : './images/r2d2.jpg',
+  leia : './images/leiaorgana.jpg',
+  vader : './images/dartvader.jpg',
+  yoda : './images/yoda.jpg',
+  c3po: './images/c3po.jpg',
+  obiwan: './images/obiwan.jpg',
+  boba: './images/bobafett.jpg',
+  jabba: './images/jabba.jpg'
 }
 
 const container = document.querySelector('#characterContainer');
 const btn = document.querySelector('#getInfo');
 
-  //När användaren klickar på knappen vill jag, för varje vald karaktär: 
-  //hämta info från API om de specifika karaktärerna
-  //Använda den infon för att skapa en instans av klassen character för valda karaktärer
-  //Rendera ut divar med namn, bild och knapp för valda karaktärer
   btn.addEventListener('click', (e)=>{
     e.preventDefault();
     console.log('user clicks Get Info')
 
-    const character1 = document.querySelector('#character1');
-    const character2 = document.querySelector('#character2');
+    let character1 = document.querySelector('#character1');
+    let character2 = document.querySelector('#character2');
 
+   
     if(character1.value !== '' && character2.value !== ''){
       fetchCharacters(character1.value, character2.value)
       .then(characters => {
-        characters.forEach(character =>{
-          character.forEach(obj =>{
-            //blir detta bra verkligen? hur gör jag sen när jag ska jämföra de båda?
-            //här vill jag också få in pictureUrl. Hur gör jag det bäst?
-            let { name, gender, height, mass, hair_color } = obj;
-            let newChar = new Character(obj.name, obj.gender, obj.height, obj.mass, obj.hair_color)
-            console.log(newChar)
+        let first = characters[0];//en array med ett objekt i
+        let second = characters[1]; 
 
-              //skapar en div med namn (och snart bild)
-              let div = document.createElement('div');
-              div.classList.add('displayDiv');
-              div.innerHTML = `<h3>Name: ${newChar.name} <br> ` /*<img src='${newChar.pictureUrl}'</img>*/
-              container.append(div);
+        //här behöver jag fortfarande hämta rätt bild-url
+        //jag behöver kanske inte skapa upp propertyn pictureUrl via klassen. kanske kan jag lägga till det ba?
+        
+        first.forEach(prop => {
+         let firstCharacter = new Character(prop.name, prop.gender, prop.height, prop.mass, prop.hair_color);
 
-          })
-        })      
+          createCharacterBox(firstCharacter);
+        });
+
+        second.forEach(prop =>{
+          let secondCharacter = new Character(prop.name, prop.gender, prop.height, prop.mass, prop.hair_color);
+          createCharacterBox(secondCharacter);
+        })
       })
     }else{
       alert('You must choose two characters!')
@@ -98,16 +103,50 @@ const btn = document.querySelector('#getInfo');
 })
 
 
-//Funktion för att skapa en instans av klassen Character av vald option
-//Använda hämtad data, de-structura objektet
+
 
 //Funktion för att skapa boxar med info om respektive karaktär
+function createCharacterBox (character){
+
+  let div = document.createElement('div');
+  div.classList.add('displayDiv');
+  div.innerHTML = `<h3>Name: ${character.name} <br> <img src='${img}'</img>`//det här gav en bildikon! För att jag skapade ett img-element, ja... 
+  container.append(div);
+}
+
+//hämta rätt bild - tror jag krånglar till det för mkt här... det här körs inte ens, förmodligen pga att propertyn finns i klassen 
+function getPic(obj){
+  let name = obj.name;
+
+  for(let url in pictureUrl){
+    if(url.value === name.value){
+      let imgUrl = url.value;
+      return imgUrl;
+    }
+  }
+  console.log(imgUrl)
+
+
+  // for(let url in pictureUrl){
+  //   //console.log(`${url}: ${pictureUrl[url]}`)//skriver ut i konsolen
+  //   //OM urlen är samma som värdet på character1, spara det i en variabel
+  //   if(url.value === name1.value){
+  //     let imgUrl = url.value;//första karaktärens bildlänk
+  //     return imgUrl;
+  //   }
+  //   else if(url.value === name2.value){
+  //   let secondImg = url.value;//andra karaktärens bildlänk
+  //   return secondImg;
+  //   }
+}
+
+
 
 //Börja med G: 1 knapp för att jämföra karaktärer
 
 //Funktion för att skapa en box att skriva ut jämförelsen i
 
-//Det som känns svårt: att organisera koden! Vad ska ligga var? 
+
 
 
 
