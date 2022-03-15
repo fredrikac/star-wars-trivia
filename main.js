@@ -58,7 +58,7 @@ const pictureUrl = {
   jabba: 'images/jabba.jpg'
 }
 
-const form = document.querySelector('#characterSelection');
+const container = document.querySelector('#characterContainer');
 const btn = document.querySelector('#getInfo');
 
   //När användaren klickar på knappen vill jag, för varje vald karaktär: 
@@ -87,7 +87,7 @@ const btn = document.querySelector('#getInfo');
               let div = document.createElement('div');
               div.classList.add('displayDiv');
               div.innerHTML = `<h3>Name: ${newChar.name} <br> ` /*<img src='${newChar.pictureUrl}'</img>*/
-              form.append(div);
+              container.append(div);
 
           })
         })      

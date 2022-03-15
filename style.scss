@@ -17,6 +17,12 @@
     flex-direction: column;
 }
 
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 
 body {
     background-image: url('https://images.unsplash.com/photo-1559657693-e816ff3bd9af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80');
@@ -30,6 +36,7 @@ body {
     main {
         @include flex-column;
         text-align: center;
+        margin: 1%;
 
         .fade-effect1{
             display:block;
@@ -42,16 +49,38 @@ body {
 
         form {
             @include flex-column;
-
+            align-items: center;
+            width: 100%;
             select {
-                margin: 1rem;
+                width: 80%;
+                margin: 2%;
             }
 
             .btn {
-                margin: 0 2rem;
+                margin: 1 2rem;
             }
-           
+        }
 
+        .characterContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .displayDiv {
+                width: 80%;    
+                border: solid 1px white;
+                border-radius: 15px;
+                margin: 1rem;
+                padding-left: 1rem;
+                backdrop-filter: blur(8px);
+                backdrop-filter: brightness(60%);
+            
+                img {
+                    width: 50%;
+                    object-fit: contain;
+                   
+                }
+            }
         }
     }
 }
@@ -68,18 +97,7 @@ h2, h3 {
     @include h2-font;
 }
 
-.displayDiv {
-    width: 80%;    
-    border: solid 1px white;
-    margin: 1rem;
-    padding-left: 1rem;
 
-    img {
-        width: 50%;
-        object-fit: contain;
-       
-    }
-}
 
 .btn {
     padding: 8px;
@@ -104,11 +122,25 @@ h2, h3 {
 //För skärmar i tablet-format och uppåt
 @media only screen and (min-width: 768px) {
 
-    main
-    {
-        form {
-            display: flex;
-            flex-direction: row;//Funkar ej, kolla sen!
-        }
-    } 
+    body {
+        main {
+            @include flex-column;
+            align-items: center;
+            form {
+                @include flex-row;
+                align-items: center;
+                width: 50%;
+
+                .btn {
+                    width: 10rem;
+                }
+            }
+
+            .characterContainer{
+                @include flex-row;
+                width: 60%;
+            }
+        } 
+    }
+    
 }
