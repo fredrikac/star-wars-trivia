@@ -12,7 +12,6 @@
 // });
 
 
-
 //Fetcha specifik info från API:et
 let fetchCharacters = async (character1, character2) => {
   let response1 = await fetch(`https://swapi.dev/api/people/?search=${character1}`);
@@ -28,7 +27,6 @@ let fetchCharacters = async (character1, character2) => {
   }
 }
 
-
 //En klass kallad Character med name, gender, height, mass,hairColor samt pictureUrl
 class Character {
     constructor(name, gender, height, mass, hair_color, pictureUrl){
@@ -40,6 +38,7 @@ class Character {
       this.pictureUrl = pictureUrl;
     }
 
+    //FORTSÄTT HÄR
     //Metoder för jämförelser -vikt, längt, hårfärg, kön
     compareMass(secondPerson){
 
@@ -48,103 +47,80 @@ class Character {
       }else if(this.mass === secondPerson.mass){
 
       }
-
     }
     compareHeight(){}
     compareHair(){}
     compareGender(){}
 }
 
-const pictureUrl = {
-  r2d2 : './images/r2d2.jpg',
-  leia : './images/leiaorgana.jpg',
-  vader : './images/dartvader.jpg',
-  yoda : './images/yoda.jpg',
-  c3po: './images/c3po.jpg',
-  obiwan: './images/obiwan.jpg',
-  boba: './images/bobafett.jpg',
-  jabba: './images/jabba.jpg'
-}
-
 const container = document.querySelector('#characterContainer');
 const btn = document.querySelector('#getInfo');
+let firstCharacter;
+let secondCharacter;
+let imgUrl1;
+let imgUrl2; 
+
+let character1 = document.querySelector('#character1');
+let character2 = document.querySelector('#character2');
+
+let compareBtn = document.querySelector('#compareBtn');
 
   btn.addEventListener('click', (e)=>{
     e.preventDefault();
     console.log('user clicks Get Info')
+    
+    //Här vore det nice att ha någon slags animation medan det laddar
+    //Behövs också en spärr för att bara kunna jämföra 2 karaktärer, dvs om anv väljer två nya och klickar på Get info ska inte dessa läggas till. location.reload()?
 
-    let character1 = document.querySelector('#character1');
-    let character2 = document.querySelector('#character2');
+    imgUrl1 = character1.value;
+    imgUrl2 = character2.value;
 
-   
     if(character1.value !== '' && character2.value !== ''){
       fetchCharacters(character1.value, character2.value)
       .then(characters => {
-        let first = characters[0];//en array med ett objekt i
+        let first = characters[0];
         let second = characters[1]; 
-
-        //här behöver jag fortfarande hämta rätt bild-url
-        //jag behöver kanske inte skapa upp propertyn pictureUrl via klassen. kanske kan jag lägga till det ba?
         
         first.forEach(prop => {
-         let firstCharacter = new Character(prop.name, prop.gender, prop.height, prop.mass, prop.hair_color);
-
+         firstCharacter = new Character(prop.name, prop.gender, prop.height, prop.mass, prop.hair_color, imgUrl1);
           createCharacterBox(firstCharacter);
         });
 
         second.forEach(prop =>{
-          let secondCharacter = new Character(prop.name, prop.gender, prop.height, prop.mass, prop.hair_color);
+          secondCharacter = new Character(prop.name, prop.gender, prop.height, prop.mass, prop.hair_color, imgUrl2);
           createCharacterBox(secondCharacter);
         })
+      }).then(()=>{
+        compareBtn.classList.remove('hidden');
+       
       })
     }else{
       alert('You must choose two characters!')
     }
+    
 })
-
-
-
 
 //Funktion för att skapa boxar med info om respektive karaktär
 function createCharacterBox (character){
-
   let div = document.createElement('div');
   div.classList.add('displayDiv');
-  div.innerHTML = `<h3>Name: ${character.name} <br> <img src='${img}'</img>`//det här gav en bildikon! För att jag skapade ett img-element, ja... 
+  div.innerHTML = `<h3>Name: ${character.name} <br> <img src='./images/${character.pictureUrl}.jpg'</img>`;
   container.append(div);
 }
 
-//hämta rätt bild - tror jag krånglar till det för mkt här... det här körs inte ens, förmodligen pga att propertyn finns i klassen 
-function getPic(obj){
-  let name = obj.name;
-
-  for(let url in pictureUrl){
-    if(url.value === name.value){
-      let imgUrl = url.value;
-      return imgUrl;
-    }
-  }
-  console.log(imgUrl)
-
-
-  // for(let url in pictureUrl){
-  //   //console.log(`${url}: ${pictureUrl[url]}`)//skriver ut i konsolen
-  //   //OM urlen är samma som värdet på character1, spara det i en variabel
-  //   if(url.value === name1.value){
-  //     let imgUrl = url.value;//första karaktärens bildlänk
-  //     return imgUrl;
-  //   }
-  //   else if(url.value === name2.value){
-  //   let secondImg = url.value;//andra karaktärens bildlänk
-  //   return secondImg;
-  //   }
-}
-
-
 
 //Börja med G: 1 knapp för att jämföra karaktärer
+compareBtn.addEventListener('click', ()=>{
+  console.log('User clicks compare button');
+
+
+})
+
 
 //Funktion för att skapa en box att skriva ut jämförelsen i
+function compareCharacterBox(){
+
+}
 
 
 

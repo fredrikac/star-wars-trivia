@@ -67,17 +67,20 @@ body {
             align-items: center;
 
             .displayDiv {
-                width: 80%;    
+                width: 80%;
+                height: 20rem;    
                 border: solid 1px white;
                 border-radius: 15px;
                 margin: 1rem;
                 padding-left: 1rem;
                 backdrop-filter: blur(8px);
-                backdrop-filter: brightness(60%);
+                backdrop-filter: brightness(40%);
             
                 img {
                     width: 50%;
+                    height: auto;
                     object-fit: contain;
+                    border: solid 1px white;
                    
                 }
             }
@@ -97,6 +100,9 @@ h2, h3 {
     @include h2-font;
 }
 
+.hidden {
+    display: none;
+}
 
 
 .btn {
