@@ -1,5 +1,4 @@
-
-//Fetcha specifik info från API:et
+//Fetch specific info from API
 let fetchCharacters = async (character1, character2) => {
   let response1 = await fetch(`https://swapi.dev/api/people/?search=${character1}`);
   let response2 = await fetch(`https://swapi.dev/api/people/?search=${character2}`);
@@ -14,20 +13,24 @@ let fetchCharacters = async (character1, character2) => {
   }
 }
 
-
-
+//DOM elements & variables
 const container = document.querySelector('#characterContainer');
 const infoContainer = document.querySelector('#infoContainer');
+
+const character1 = document.querySelector('#character1');
+const character2 = document.querySelector('#character2');
+
 const btn = document.querySelector('#getInfo');
+const resetBtn = document.querySelector('#reset');
+
 let firstCharacter;
 let secondCharacter;
 let imgUrl1;
 let imgUrl2; 
 
-let character1 = document.querySelector('#character1');
-let character2 = document.querySelector('#character2');
 
-//En klass kallad Character med name, gender, height, mass,hairColor samt pictureUrl
+
+//Class to create characters
 class Character {
     constructor(name, gender, height, mass, hair_color, pictureUrl){
       this.name = name;
@@ -38,41 +41,39 @@ class Character {
       this.pictureUrl = pictureUrl;
     }
 
-  //FORTSÄTT HÄR
-  //Metoder för jämförelser -vikt, längt, hårfärg, kön
+  //Methods for comparison
     compareMass(secondPerson){
-      console.log('calling the compareMass function')
+
       let compareText = document.createElement('p');
 
-      //börja med att konsollogga jämförelsen. 
       if((parseFloat(this.mass) < (parseFloat(secondPerson.mass)))){
         console.log('second character is heaviest')
-
         compareText.innerText = `${secondPerson.name} is heavier than ${this.name}.`
-        document.body.append(compareText) 
+        infoContainer.append(compareText) 
 
       }else{
         console.log('first character is heavier')
         compareText.innerText = `${this.name} is heavier than ${secondPerson.name}.`
-        document.body.append(compareText) 
+        infoContainer.append(compareText) 
       }
     }
 
     compareHeight(secondPerson){
+
       let compareHeight = document.createElement('p');
 
-      console.log('calling the compare height function')
       if((parseFloat(this.height) < (parseFloat(secondPerson.height)))){
         console.log('second character is taller')
         compareHeight.innerText = `${secondPerson.name} is taller than ${this.name}.`
-        document.body.append(compareHeight) 
+        infoContainer.append(compareHeight) 
       }else{
         console.log('first character is taller')
         compareHeight.innerText = `${this.name} is taller than ${secondPerson.name}.`
-        document.body.append(compareHeight) 
+        infoContainer.append(compareHeight) 
       }
     }
 
+    //Adjust these later
     compareHair(secondPerson){
       if(this.hair_color === secondPerson.hair_color){
         console.log('They have the same hair color')
@@ -90,11 +91,10 @@ class Character {
         second characters is a: ${secondPerson.gender}`)
       }
     }
-
 }
 
 
-
+//Buttons
 let compareBtn = document.querySelector('#compareBtn');
   btn.addEventListener('click', (e)=>{
     e.preventDefault();
@@ -123,7 +123,8 @@ let compareBtn = document.querySelector('#compareBtn');
         })
       }).then(()=>{
         compareBtn.classList.remove('hidden');
-        document.getElementById('getInfo').disabled = true;//detta gör att man inte kan hämta fler än 2. Borde gå att göra snyggare?
+        resetBtn.classList.remove('hidden');
+        btn.classList.add('hidden');
         character1.value = '';
         character2.value = '';
       })
@@ -133,9 +134,24 @@ let compareBtn = document.querySelector('#compareBtn');
     
 })
 
+compareBtn.addEventListener('click', ()=>{
+  console.log('User clicks compare button');
 
+  characterInfoBox(firstCharacter);
+  characterInfoBox(secondCharacter);
+  firstCharacter.compareHeight(secondCharacter);
+  firstCharacter.compareMass(secondCharacter);
 
-//Funktion för att skapa boxar med info om respektive karaktär
+  firstCharacter.compareHair(secondCharacter)
+  firstCharacter.compareGender(secondCharacter)
+})
+
+resetBtn.addEventListener('click', (e)=>{
+  e.preventDefault();
+  location.reload();
+});
+
+//Functions 
 function createCharacterBox (character){
   let div = document.createElement('div');
   div.classList.add('displayDiv');
@@ -143,21 +159,6 @@ function createCharacterBox (character){
   container.append(div);
 }
 
-   //Börja med G: 1 knapp för att jämföra karaktärer
-   compareBtn.addEventListener('click', ()=>{
-    console.log('User clicks compare button');
-
-    characterInfoBox(firstCharacter);
-    characterInfoBox(secondCharacter);
-    firstCharacter.compareMass(secondCharacter);
-    firstCharacter.compareHeight(secondCharacter);
-    firstCharacter.compareHair(secondCharacter)
-    firstCharacter.compareGender(secondCharacter)
-  })
-
-
-
-//Funktion för att skapa en box att skriva ut info om karaktärerna
 function characterInfoBox(character){
   let infoDiv = document.createElement('div');
   infoDiv.classList.add('infoDiv');
@@ -165,18 +166,10 @@ function characterInfoBox(character){
   infoDiv.innerHTML = `<h2>${character.name}</h2> <ul><li>Height: ${character.height}</li><li>Weight: ${character.mass}</li>
   <li>Gender: ${character.gender}</li><li>Hair color: ${character.hair_color}</li></ul>`
   infoContainer.append(infoDiv);
-
   compareBtn.classList.add('hidden');
 }
 
 
-
-
-
-
-//Skapa en box att skriva ut jämförelsen i
-//Lägg till: reset knapp
-//ändra innertext på getInfo till Reset och kör en location reload? 
 
 //Börja med VG-kraven
 //Justera styling så det ser fint ut
