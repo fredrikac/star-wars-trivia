@@ -42,20 +42,34 @@ class Character {
   //Metoder för jämförelser -vikt, längt, hårfärg, kön
     compareMass(secondPerson){
       console.log('calling the compareMass function')
+      let compareText = document.createElement('p');
+
       //börja med att konsollogga jämförelsen. 
       if((parseFloat(this.mass) < (parseFloat(secondPerson.mass)))){
         console.log('second character is heaviest')
+
+        compareText.innerText = `${secondPerson.name} is heavier than ${this.name}.`
+        document.body.append(compareText) 
+
       }else{
         console.log('first character is heavier')
+        compareText.innerText = `${this.name} is heavier than ${secondPerson.name}.`
+        document.body.append(compareText) 
       }
     }
 
     compareHeight(secondPerson){
+      let compareHeight = document.createElement('p');
+
       console.log('calling the compare height function')
       if((parseFloat(this.height) < (parseFloat(secondPerson.height)))){
         console.log('second character is taller')
+        compareHeight.innerText = `${secondPerson.name} is taller than ${this.name}.`
+        document.body.append(compareHeight) 
       }else{
         console.log('first character is taller')
+        compareHeight.innerText = `${this.name} is taller than ${secondPerson.name}.`
+        document.body.append(compareHeight) 
       }
     }
 
@@ -87,7 +101,6 @@ let compareBtn = document.querySelector('#compareBtn');
     console.log('user clicks Get Info')
     
     //Här vore det nice att ha någon slags animation medan det laddar
-    //Behövs också en spärr för att bara kunna jämföra 2 karaktärer, dvs om anv väljer två nya och klickar på Get info ska inte dessa läggas till. location.reload()?
 
     imgUrl1 = character1.value;
     imgUrl2 = character2.value;
@@ -156,9 +169,15 @@ function characterInfoBox(character){
   compareBtn.classList.add('hidden');
 }
 
+
+
+
+
+
+//Skapa en box att skriva ut jämförelsen i
 //Lägg till: reset knapp
 //ändra innertext på getInfo till Reset och kör en location reload? 
-//Skapa en box att skriva ut jämförelsen i
+
 //Börja med VG-kraven
 //Justera styling så det ser fint ut
 
