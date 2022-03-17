@@ -85,10 +85,18 @@ body {
                 }
             }
         }
+
+        .infoDiv {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: left;
+            font-size: large;
+        }
     }
 }
 
-h1, h2, h3, p {
+h1, h2, h3, p, li {
     color: white
 }
 
@@ -98,6 +106,14 @@ h1 {
 
 h2, h3 {
     @include h2-font;
+}
+
+p, li {
+    @include p-font;
+}
+
+ul {
+    list-style-type: none;
 }
 
 .hidden {
@@ -144,6 +160,7 @@ h2, h3 {
 
             .characterContainer{
                 @include flex-row;
+               
                 width: 60%;
             }
         } 

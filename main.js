@@ -1,16 +1,3 @@
-// //hämta data från API mha axios
-// axios
-// .get("https://swapi.dev/api/people", {
-// //   params: {//här kan vi hämta specifika parametrar från API!
-// //     userId : userIdValue,
-// //     id: 124
-// //   }
-// })
-// .then( (response)=> {
-//   // handle success
-//   console.log(response.data);//får ut objektet. Dubbelkolla detta sen. 
-// });
-
 
 //Fetcha specifik info från API:et
 let fetchCharacters = async (character1, character2) => {
@@ -27,6 +14,19 @@ let fetchCharacters = async (character1, character2) => {
   }
 }
 
+
+
+const container = document.querySelector('#characterContainer');
+const infoContainer = document.querySelector('#infoContainer');
+const btn = document.querySelector('#getInfo');
+let firstCharacter;
+let secondCharacter;
+let imgUrl1;
+let imgUrl2; 
+
+let character1 = document.querySelector('#character1');
+let character2 = document.querySelector('#character2');
+
 //En klass kallad Character med name, gender, height, mass,hairColor samt pictureUrl
 class Character {
     constructor(name, gender, height, mass, hair_color, pictureUrl){
@@ -38,33 +38,50 @@ class Character {
       this.pictureUrl = pictureUrl;
     }
 
-    //FORTSÄTT HÄR
-    //Metoder för jämförelser -vikt, längt, hårfärg, kön
+  //FORTSÄTT HÄR
+  //Metoder för jämförelser -vikt, längt, hårfärg, kön
     compareMass(secondPerson){
-
-      if(this.mass < secondPerson.mass){
-        return `${this.name} weighs ${this.mass}, which is less than ${secondPerson.name}, ${secondPerson.mass}`;
-      }else if(this.mass === secondPerson.mass){
-
+      console.log('calling the compareMass function')
+      //börja med att konsollogga jämförelsen. 
+      if((parseFloat(this.mass) < (parseFloat(secondPerson.mass)))){
+        console.log('second character is heaviest')
+      }else{
+        console.log('first character is heavier')
       }
     }
-    compareHeight(){}
-    compareHair(){}
-    compareGender(){}
+
+    compareHeight(secondPerson){
+      console.log('calling the compare height function')
+      if((parseFloat(this.height) < (parseFloat(secondPerson.height)))){
+        console.log('second character is taller')
+      }else{
+        console.log('first character is taller')
+      }
+    }
+
+    compareHair(secondPerson){
+      if(this.hair_color === secondPerson.hair_color){
+        console.log('They have the same hair color')
+      }else{
+        console.log(`First characters hair color is: ${this.hair_color}, 
+        second characters hair color is: ${secondPerson.hair_color}`)
+      }
+    }
+
+    compareGender(secondPerson){
+      if(this.gender === secondPerson.gender){
+        console.log(`they are the same gender, that is: ${this.gender}`)
+      }else{
+        console.log(`First characters is a: ${this.gender}, 
+        second characters is a: ${secondPerson.gender}`)
+      }
+    }
+
 }
 
-const container = document.querySelector('#characterContainer');
-const btn = document.querySelector('#getInfo');
-let firstCharacter;
-let secondCharacter;
-let imgUrl1;
-let imgUrl2; 
 
-let character1 = document.querySelector('#character1');
-let character2 = document.querySelector('#character2');
 
 let compareBtn = document.querySelector('#compareBtn');
-
   btn.addEventListener('click', (e)=>{
     e.preventDefault();
     console.log('user clicks Get Info')
@@ -89,10 +106,13 @@ let compareBtn = document.querySelector('#compareBtn');
         second.forEach(prop =>{
           secondCharacter = new Character(prop.name, prop.gender, prop.height, prop.mass, prop.hair_color, imgUrl2);
           createCharacterBox(secondCharacter);
+          
         })
       }).then(()=>{
         compareBtn.classList.remove('hidden');
-       
+        document.getElementById('getInfo').disabled = true;//detta gör att man inte kan hämta fler än 2. Borde gå att göra snyggare?
+        character1.value = '';
+        character2.value = '';
       })
     }else{
       alert('You must choose two characters!')
@@ -100,28 +120,47 @@ let compareBtn = document.querySelector('#compareBtn');
     
 })
 
+
+
 //Funktion för att skapa boxar med info om respektive karaktär
 function createCharacterBox (character){
   let div = document.createElement('div');
   div.classList.add('displayDiv');
-  div.innerHTML = `<h3>Name: ${character.name} <br> <img src='./images/${character.pictureUrl}.jpg'</img>`;
+  div.innerHTML = `<h3>Name: ${character.name} <br> <img src='./images/${character.pictureUrl}.jpg' alt='picture of ${character.name}'</img>`;
   container.append(div);
 }
 
+   //Börja med G: 1 knapp för att jämföra karaktärer
+   compareBtn.addEventListener('click', ()=>{
+    console.log('User clicks compare button');
 
-//Börja med G: 1 knapp för att jämföra karaktärer
-compareBtn.addEventListener('click', ()=>{
-  console.log('User clicks compare button');
+    characterInfoBox(firstCharacter);
+    characterInfoBox(secondCharacter);
+    firstCharacter.compareMass(secondCharacter);
+    firstCharacter.compareHeight(secondCharacter);
+    firstCharacter.compareHair(secondCharacter)
+    firstCharacter.compareGender(secondCharacter)
+  })
 
 
-})
 
+//Funktion för att skapa en box att skriva ut info om karaktärerna
+function characterInfoBox(character){
+  let infoDiv = document.createElement('div');
+  infoDiv.classList.add('infoDiv');
 
-//Funktion för att skapa en box att skriva ut jämförelsen i
-function compareCharacterBox(){
+  infoDiv.innerHTML = `<h2>${character.name}</h2> <ul><li>Height: ${character.height}</li><li>Weight: ${character.mass}</li>
+  <li>Gender: ${character.gender}</li><li>Hair color: ${character.hair_color}</li></ul>`
+  infoContainer.append(infoDiv);
 
+  compareBtn.classList.add('hidden');
 }
 
+//Lägg till: reset knapp
+//ändra innertext på getInfo till Reset och kör en location reload? 
+//Skapa en box att skriva ut jämförelsen i
+//Börja med VG-kraven
+//Justera styling så det ser fint ut
 
 
 

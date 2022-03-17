@@ -93,7 +93,22 @@ body main .characterContainer .displayDiv img {
   border: solid 1px white;
 }
 
-h1, h2, h3, p {
+body main .infoDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  text-align: left;
+  font-size: large;
+}
+
+h1, h2, h3, p, li {
   color: white;
 }
 
@@ -103,6 +118,14 @@ h1 {
 
 h2, h3 {
   font-family: 'Jura', sans-serif;
+}
+
+p, li {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+  list-style-type: none;
 }
 
 .hidden {

@@ -36,15 +36,3 @@ Karaktär 2’s kön. Om det är samma som Karaktär 1, skriv ut detta också.
 Glöm ej att man ska kunna ställa samma frågor till Karaktär 2 också.
 
 
-//Spara bildlänkar i ett objekt
-const pictureUrl = {
-  R2D2 : 'https://i.pinimg.com/originals/66/3e/85/663e8560d3d8a7c9ee10977f22158df4.jpg',
-  leiaOrgana : 'https://upload.wikimedia.org/wikipedia/en/1/1b/Princess_Leia%27s_characteristic_hairstyle.jpg',
-  darthVader : 'https://media.contentapi.ea.com/content/dam/star-wars-battlefront-2/images/2019/08/swbf2-refresh-hero-large-heroes-page-darth-vader-16x9-xl.jpg.adapt.crop1x1.320w.jpg',
-  yoda : 'https://static.wikia.nocookie.net/starwars/images/d/d6/Yoda_SWSB.png/revision/latest?cb=20150206140125',
-  c3po: 'https://static.wikia.nocookie.net/starwars/images/5/51/C-3PO_EP3.png/revision/latest?cb=20131005124036',
-  obiWanKenobi: 'https://static.wikia.nocookie.net/starwars/images/3/34/Obi.jpg/revision/latest?cb=20120402184718&path-prefix=cs',
-  bobaFett: 'https://static.wikia.nocookie.net/starwars/images/2/20/Boba_fett1.JPG/revision/latest/scale-to-width-down/250?cb=20090424151514&path-prefix=sv',
-  jabba: 'https://static.wikia.nocookie.net/star-wars-canon-fanon/images/9/90/Hutt.jpg/revision/latest/top-crop/width/360/height/450?cb=20170811183235'
-
-}
