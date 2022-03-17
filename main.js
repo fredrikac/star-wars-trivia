@@ -43,33 +43,34 @@ class Character {
 
   //Methods for comparison
     compareMass(secondPerson){
-
-      let compareText = document.createElement('p');
+      let comparisonDiv = document.createElement('div');
+      comparisonDiv.classList.add('comparisonDiv');
 
       if((parseFloat(this.mass) < (parseFloat(secondPerson.mass)))){
         console.log('second character is heaviest')
-        compareText.innerText = `${secondPerson.name} is heavier than ${this.name}.`
-        infoContainer.append(compareText) 
-
+        comparisonDiv.innerHTML = `<p>${secondPerson.name} is heavier than ${this.name}.</p>`
+        infoContainer.appendChild(comparisonDiv)
       }else{
         console.log('first character is heavier')
-        compareText.innerText = `${this.name} is heavier than ${secondPerson.name}.`
-        infoContainer.append(compareText) 
+
+        comparisonDiv.innerHTML = `<p>${this.name} is heavier than ${secondPerson.name}.</p>`
+        infoContainer.appendChild(comparisonDiv)
       }
     }
 
     compareHeight(secondPerson){
-
-      let compareHeight = document.createElement('p');
+      let comparisonDiv = document.createElement('div');
+      comparisonDiv.classList.add('comparisonDiv');
 
       if((parseFloat(this.height) < (parseFloat(secondPerson.height)))){
         console.log('second character is taller')
-        compareHeight.innerText = `${secondPerson.name} is taller than ${this.name}.`
-        infoContainer.append(compareHeight) 
+        comparisonDiv.innerHTML = `<p>${secondPerson.name} is taller than ${this.name}.</p>`
+        infoContainer.appendChild(comparisonDiv)
+
       }else{
         console.log('first character is taller')
-        compareHeight.innerText = `${this.name} is taller than ${secondPerson.name}.`
-        infoContainer.append(compareHeight) 
+        comparisonDiv.innerHTML = `<p>${this.name} is taller than ${secondPerson.name}.</p>`
+        infoContainer.appendChild(comparisonDiv)
       }
     }
 
@@ -106,6 +107,10 @@ let compareBtn = document.querySelector('#compareBtn');
     imgUrl2 = character2.value;
 
     if(character1.value !== '' && character2.value !== ''){
+
+      if(character1.value === character2.value){
+        alert('Please choose two different characters. :)')
+      }else{
       fetchCharacters(character1.value, character2.value)
       .then(characters => {
         let first = characters[0];
@@ -125,9 +130,7 @@ let compareBtn = document.querySelector('#compareBtn');
         compareBtn.classList.remove('hidden');
         resetBtn.classList.remove('hidden');
         btn.classList.add('hidden');
-        character1.value = '';
-        character2.value = '';
-      })
+      })}
     }else{
       alert('You must choose two characters!')
     }
@@ -136,6 +139,7 @@ let compareBtn = document.querySelector('#compareBtn');
 
 compareBtn.addEventListener('click', ()=>{
   console.log('User clicks compare button');
+  infoContainer.classList.remove('notVisible');
 
   characterInfoBox(firstCharacter);
   characterInfoBox(secondCharacter);
@@ -155,7 +159,7 @@ resetBtn.addEventListener('click', (e)=>{
 function createCharacterBox (character){
   let div = document.createElement('div');
   div.classList.add('displayDiv');
-  div.innerHTML = `<h3>Name: ${character.name} <br> <img src='./images/${character.pictureUrl}.jpg' alt='picture of ${character.name}'</img>`;
+  div.innerHTML = `<h3>${character.name}</h3> <br> <img src='./images/${character.pictureUrl}.jpg' alt='picture of ${character.name}'</img>`;
   container.append(div);
 }
 
@@ -163,7 +167,7 @@ function characterInfoBox(character){
   let infoDiv = document.createElement('div');
   infoDiv.classList.add('infoDiv');
 
-  infoDiv.innerHTML = `<h2>${character.name}</h2> <ul><li>Height: ${character.height}</li><li>Weight: ${character.mass}</li>
+  infoDiv.innerHTML = `<ul><li>Name: ${character.name}</li> <li>Height: ${character.height}</li><li>Weight: ${character.mass}</li>
   <li>Gender: ${character.gender}</li><li>Hair color: ${character.hair_color}</li></ul>`
   infoContainer.append(infoDiv);
   compareBtn.classList.add('hidden');
@@ -172,6 +176,7 @@ function characterInfoBox(character){
 
 
 //Börja med VG-kraven
+//Skapa upp 4 st knappar under varje karaktär
 //Justera styling så det ser fint ut
 
 

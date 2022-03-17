@@ -23,6 +23,9 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-align: center;
   margin: 1%;
 }
@@ -31,7 +34,8 @@ body main .fade-effect1 {
   display: block;
   border: none;
   color: black;
-  height: 1px;
+  height: 2px;
+  width: 80%;
   background: white;
   background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#fff), to(#000));
 }
@@ -74,26 +78,38 @@ body main .characterContainer {
 
 body main .characterContainer .displayDiv {
   width: 80%;
-  height: 20rem;
   border: solid 1px white;
   border-radius: 15px;
   margin: 1rem;
-  padding-left: 1rem;
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
   -webkit-backdrop-filter: brightness(40%);
           backdrop-filter: brightness(40%);
+  width: 300px;
+  height: auto;
+}
+
+body main .characterContainer .displayDiv h3 {
+  margin: 1rem 0rem 0rem 0rem;
 }
 
 body main .characterContainer .displayDiv img {
-  width: 50%;
+  width: 10em;
   height: auto;
   -o-object-fit: contain;
      object-fit: contain;
   border: solid 1px white;
 }
 
-body main .infoDiv {
+body main .infoContainer {
+  width: 80%;
+  border: solid 1px white;
+  border-radius: 15px;
+  margin: 1rem;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: brightness(40%);
+          backdrop-filter: brightness(40%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -101,11 +117,33 @@ body main .infoDiv {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body main .infoContainer .infoDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   text-align: left;
+  width: 80%;
   font-size: large;
+}
+
+body main .infoContainer .infoDiv ul {
+  margin-left: -1rem;
+}
+
+body main .comparisonDiv {
+  width: 100%;
+  text-align: left;
+  margin: 0;
+  padding-left: 1rem;
 }
 
 h1, h2, h3, p, li {
@@ -130,6 +168,10 @@ ul {
 
 .hidden {
   display: none;
+}
+
+.notVisible {
+  visibility: hidden;
 }
 
 .btn {
@@ -197,7 +239,36 @@ ul {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    width: 60%;
+  }
+  body main .characterContainer .displayDiv {
+    height: 20rem;
+  }
+  body main .infoContainer {
+    width: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: space-evenly;
+        -ms-flex-align: space-evenly;
+            align-items: space-evenly;
+    padding-bottom: 1rem;
+  }
+  body main .infoContainer .infoDiv {
+    height: 130px;
+    width: 300px;
+  }
+  body main .infoContainer .comparisonDiv {
+    height: 40px;
+    width: 300px;
   }
 }
 /*# sourceMappingURL=style.css.map */
