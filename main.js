@@ -94,14 +94,11 @@ class Character {
     }
 }
 
-
 //Buttons
 let compareBtn = document.querySelector('#compareBtn');
   btn.addEventListener('click', (e)=>{
     e.preventDefault();
-    console.log('user clicks Get Info')
-    
-    //Här vore det nice att ha någon slags animation medan det laddar
+    console.log('user clicks Get Info');
 
     imgUrl1 = character1.value;
     imgUrl2 = character2.value;
@@ -109,7 +106,7 @@ let compareBtn = document.querySelector('#compareBtn');
     if(character1.value !== '' && character2.value !== ''){
 
       if(character1.value === character2.value){
-        alert('Please choose two different characters. :)')
+        alert('Please choose two different characters. :)');
       }else{
       fetchCharacters(character1.value, character2.value)
       .then(characters => {
@@ -134,7 +131,6 @@ let compareBtn = document.querySelector('#compareBtn');
     }else{
       alert('You must choose two characters!')
     }
-    
 })
 
 compareBtn.addEventListener('click', ()=>{
@@ -175,9 +171,6 @@ function characterInfoBox(character){
 
 
 
-//Börja med VG-kraven
-//Skapa upp 4 st knappar under varje karaktär
-//Justera styling så det ser fint ut
 
 
 
